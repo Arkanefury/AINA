@@ -295,7 +295,6 @@
     </div>
     
     <script>
-        // Load files from localStorage on page load
         window.addEventListener('DOMContentLoaded', function() {
             displayStoredFiles();
         });
@@ -305,7 +304,6 @@
             const file = fileInput.files[0];
             
             if (file) {
-                // Check if it's a JSON file
                 if (!file.name.endsWith('.json')) {
                     alert('Please upload a valid JSON file');
                     return;
@@ -315,10 +313,8 @@
                 reader.onload = function(e) {
                     try {
                         const jsonContent = e.target.result;
-                        // Validate JSON
                         JSON.parse(jsonContent);
 
-                        // Save to localStorage
                         const files = JSON.parse(localStorage.getItem('uploadedFiles') || '{}');
                         files[file.name] = {
                             content: jsonContent,
@@ -328,7 +324,7 @@
 
                         alert('✅ File uploaded successfully: ' + file.name);
                         displayStoredFiles();
-                        fileInput.value = ''; // Reset input
+                        fileInput.value = '';
                     } catch (error) {
                         alert('❌ Invalid JSON file: ' + error.message);
                     }
@@ -392,4 +388,5 @@
         }
     </script>
 </body>
+
 </html>
